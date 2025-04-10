@@ -4,19 +4,9 @@
 
 // This is the raw script - consider using the compressed /uglified version: talisker.js
 
-/* Example */
+/* Configuration  */
 
 const YOUR_ACCOUNT_ID="1" // Add your accont ID here
-
-const TASKS = [{
-    "id":"exampleMetric1",
-    "name":"Example Metric",
-    "accountId":YOUR_ACCOUNT_ID,
-    "selector":"value",
-    "ingestType": "metric",
-    "query":"FROM Public_APICall select uniqueCount(api) as value since 1 hour ago"
-}
-]
 
 const NAMESPACE ="talisker"         // metric details are prefixed with this, best to leave as is
 const NEWRELIC_DC = "US"            // datacenter for account - US or EU
@@ -24,9 +14,22 @@ const ACCOUNT_ID = YOUR_ACCOUNT_ID; // Account ID for ingest (required if ingest
 let INSERT_KEY=typeof $secure !== 'undefined' ? $secure.YOUR_SECURE_CRED_CONTAINING_INSERT_KEY : "YOUR-INGEST-API-KEY"; //use secure credentials if possible!
 let QUERY_KEY= typeof $secure !== 'undefined' ? $secure.YOUR_SECURE_CRED_CONTAINING_QUERY_KEY : "YOUR-USER-API-KEY"; //use secure credentials if possible!
 
+// Task Setup ------------------
+
+const TASKS = [
+{
+    "id":"exampleMetric1",
+    "name":"Example Metric",
+    "accountId":YOUR_ACCOUNT_ID,
+    "selector":"value",
+    "ingestType": "metric",
+    "query":"FROM Transaction select count(*) as value since 1 hour ago"
+}
+];
+
 
 /*
-* End of example-------------
+* End of Configuration -------------
 */
 
 // Configurations - You shouldnt need to adjust these
@@ -55,8 +58,8 @@ if (IS_LOCAL_ENV) {
   RUNNING_LOCALLY=true
   var $http = require("request");       //only for local development testing
   var $secure = {}                      //only for local development testing
-  QUERY_KEY=""  //NRAK...
-  INSERT_KEY=""  //...NRAL
+  QUERY_KEY="NRAK-.."  //NRAK...
+  INSERT_KEY="...FFFFNRAL"  //...NRAL
 
   console.log("Running in local mode",true)
 } 
@@ -355,6 +358,7 @@ async function runtasks(tasks) {
                             let filteredResultSet=resultSet.filter((e)=>{return e.hasOwnProperty('value')})
                             if(filteredResultSet.length!==resultSet.length) {
                                 console.log(`Not all current and previous records had valid values for both, ${resultSet.length-filteredResultSet.length} of them were dropped`)
+                                console.log(resultSet)
                             }
                             result=filteredResultSet
                         }

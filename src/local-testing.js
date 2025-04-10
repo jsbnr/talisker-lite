@@ -10,8 +10,8 @@ if (IS_LOCAL_ENV) {
   RUNNING_LOCALLY=true
   var $http = require("request");       //only for local development testing
   var $secure = {}                      //only for local development testing
-  QUERY_KEY="NRAK-NQO5GFDRDV91LZWQD4DE2CUHWG3"  //NRAK...
-  INSERT_KEY="ecee4b29b4faa2732485f12aad756353FFFFNRAL"  //...NRAL
+  QUERY_KEY="NRAK-.."  //NRAK...
+  INSERT_KEY="...FFFFNRAL"  //...NRAL
 
   console.log("Running in local mode",true)
 } 

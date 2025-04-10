@@ -6,6 +6,14 @@
 
 const YOUR_ACCOUNT_ID="3934073" // Your account ID ;
 
+const NAMESPACE ="talisker"  ;       // metric details are prefixed with this, best to leave as is
+const NEWRELIC_DC = "US";            // datacenter for account - US or EU
+const ACCOUNT_ID = YOUR_ACCOUNT_ID;  // Account ID (required if ingesting events)
+let INSERT_KEY=typeof $secure !== 'undefined' ? $secure.YOUR_SECURE_CRED_CONTAINING_INSERT_KEY : "YOUR-INGEST-API-KEY"; //use secure credentials if possible!
+let QUERY_KEY= typeof $secure !== 'undefined' ? $secure.YOUR_SECURE_CRED_CONTAINING_QUERY_KEY : "YOUR-USER-API-KEY"; //use secure credentials if possible!
+
+
+// Some constants to derive time windows for some of the example queries
 
 const bucketSize = 1000 * 60 * 10; // 10 minutes
 const buffer = 1000 * 60 * 5; //5 minutes (exclude the last 5 minutes of data, it might not have all arrived yet)
@@ -15,10 +23,12 @@ const sinceTime = untilTime - bucketSize; // since 15 minutes ago
 const metricPrefix = "apiCount10m";
 
 const daysLookBack = 6; // look back over the last 6 days before today
-const mainQuery = `FROM Transaction select count(*) as value`
+const mainQuery = `FROM Transaction select count(*) as value`;
 
-const TASKS=[]
 
+// Task Setup
+
+const TASKS=[];
 
 /* 
 * Build the tasks to query data for each of the previous 7 days
@@ -98,11 +108,6 @@ TASKS.push({
 
 //console.log(TASKS);
 
-const NAMESPACE ="talisker"  ;       // metric details are prefixed with this, best to leave as is
-const NEWRELIC_DC = "US"  ;          // datacenter for account - US or EU
-const ACCOUNT_ID = YOUR_ACCOUNT_ID;  // Account ID (required if ingesting events)
-let INSERT_KEY=typeof $secure !== 'undefined' ? $secure.YOUR_SECURE_CRED_CONTAINING_INSERT_KEY : "YOUR-INGEST-API-KEY"; //use secure credentials if possible!
-let QUERY_KEY= typeof $secure !== 'undefined' ? $secure.YOUR_SECURE_CRED_CONTAINING_QUERY_KEY : "YOUR-USER-API-KEY"; //use secure credentials if possible!
 
 /*
 * End of example-------------

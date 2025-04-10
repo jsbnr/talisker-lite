@@ -290,6 +290,7 @@ async function runtasks(tasks) {
                             let filteredResultSet=resultSet.filter((e)=>{return e.hasOwnProperty('value')})
                             if(filteredResultSet.length!==resultSet.length) {
                                 console.log(`Not all current and previous records had valid values for both, ${resultSet.length-filteredResultSet.length} of them were dropped`)
+                                console.log(resultSet)
                             }
                             result=filteredResultSet
                         }

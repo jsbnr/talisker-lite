@@ -16,6 +16,8 @@ Features include:
 ## Installation and setup
 Copy the content of [talisker.js](.talisker.js) into a New Relic Scripted API monitor. Configure with your account details and API keys and define the tasks you wish to run.
 
+> Note: The file [talisker-src.js](talisker-src.js) is also available which includes the full talisker code but uncompressed.
+
 You will need to specify two API keys, one a user key api and one ingest insert key. These are to query and inject the data respectively. We recommend that you store these in the secure credential store.
 
 ### Running locally

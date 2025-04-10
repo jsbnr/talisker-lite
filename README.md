@@ -19,7 +19,7 @@ Copy the content of [talisker.js](.talisker.js) into a New Relic Scripted API mo
 You will need to specify two API keys, one a user key api and one ingest insert key. These are to query and inject the data respectively. We recommend that you store these in the secure credential store.
 
 ### Running locally
-You can run and test on your local machine. With nodejs installed run `npm install` to install dependencies. Then edit the file accordingly (adding your own API keys where appropriate in the local config section and setting up your tasks manually). Run the sript with `node base_script.js` 
+You can run and test on your local machine. With nodejs installed run `npm install` to install dependencies. Then edit the file accordingly (adding your own API keys where appropriate in the local config section and setting up your tasks manually). Run the script with `node talisker.js` 
 
 ## Task configuration
 You configure tasks through the TASKS json object. Each task you can specify:
